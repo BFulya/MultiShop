@@ -22,7 +22,7 @@ namespace MultiShop.Catalog.Services.ProductDetailServices
             _mapper = mapper;
         }
 
-        public async Task CreateProductAsync(CreateProductDetailDto createProductDetailDto)
+        public async Task CreateProductDetailAsync(CreateProductDetailDto createProductDetailDto)
         {
             var values = _mapper.Map<ProductDetail>(createProductDetailDto);
             await _ProductDetailCollection.InsertOneAsync(values);
@@ -31,15 +31,15 @@ namespace MultiShop.Catalog.Services.ProductDetailServices
         {
             await _ProductDetailCollection.DeleteOneAsync(x => x.ProductDetailId == id);
         }
-        public async Task<GetByIdProductDto> GetByIdProductAsync(string id)
+        public async Task<GetByIdProductDetailDto> GetByIdProductDetailAsync(string id)
         {
             var values = await _ProductDetailCollection.Find<ProductDetail>(x => x.ProductDetailId == id).FirstOrDefaultAsync();
-            return _mapper.Map<GetByIdProductDto>(values);
+            return _mapper.Map<GetByIdProductDetailDto>(values);
         }
-        public async Task<List<ResultProductDto>> GetAllProductAsync()
+        public async Task<List<ResultProductDetailDto>> GetAllProductDetailAsync()
         {
             var values = await _ProductDetailCollection.Find(x => true).ToListAsync();
-            return _mapper.Map<List<ResultProductDto>>(values);
+            return _mapper.Map<List<ResultProductDetailDto>>(values);
         }
         public async Task UpdateProductDetailAsync(UpdateProductDetailDto updateProductDetailDto)
         {
