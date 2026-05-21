@@ -10,44 +10,44 @@ namespace MultiShop.Catalog.Controllers
     public class ProductDetailsController : ControllerBase
     {
 
-        private readonly IProductDetailService _ProductDetailService;
+        private readonly IProductDetailService _productDetailService;
         public ProductDetailsController(IProductDetailService ProductDetailService)
         {
-            _ProductDetailService = ProductDetailService;
+            _productDetailService = ProductDetailService;
         }
 
         [HttpGet]
 
         public async Task<IActionResult> ProductDetailList()
         {
-            var values = await _ProductDetailService.GetAllProductDetailAsync();
+            var values = await _productDetailService.GetAllProductDetailAsync();
             return Ok(values);
         }
         [HttpGet("id")]
         public async Task<IActionResult> GetCategoryById(string id)
         {
-            var values = _ProductDetailService.GetByIdProductDetailAsync(id);
+            var values =await _productDetailService.GetByIdProductDetailAsync(id);
             return Ok(values);
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateProductDetail(CreateProductDetailDto createProductDetailDto)
         {
-            await _ProductDetailService.CreateProductDetailAsync(createProductDetailDto);
+            await _productDetailService.CreateProductDetailAsync(createProductDetailDto);
             return Ok("Product Detail added successfully");
         }
 
         [HttpDelete]
         public async Task<IActionResult> DeleteProductDetail(string id)
         {
-            await _ProductDetailService.DeleteProductDetailAsync(id);
+            await _productDetailService.DeleteProductDetailAsync(id);
             return Ok("Product Detail deleted successfully");
         }
         [HttpPut]
 
         public async Task<IActionResult> UpdateCategory(UpdateProductDetailDto updateProductDetailDto)
         {
-            await _ProductDetailService.UpdateProductDetailAsync(updateProductDetailDto);
+            await _productDetailService.UpdateProductDetailAsync(updateProductDetailDto);
             return Ok("Product Detail updated successfully");
         }
     }

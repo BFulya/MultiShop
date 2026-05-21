@@ -9,44 +9,44 @@ namespace MultiShop.Catalog.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private readonly IProductService _ProductService;
+        private readonly IProductService _productService;
         public ProductsController(IProductService ProductService)
         {
-            _ProductService = ProductService;
+            _productService = ProductService;
         }
 
         [HttpGet]
 
         public async Task<IActionResult> ProductList()
         {
-            var values = await _ProductService.GetAllProductAsync();
+            var values = await _productService.GetAllProductAsync();
             return Ok(values);
         }
         [HttpGet("id")]
         public async Task<IActionResult> GetProductyById(string id)
         {
-            var values = _ProductService.GetByIdProductAsync(id);
+            var values = await _productService.GetByIdProductAsync(id);
             return Ok(values);
         }
 
         [HttpPost]
-        public async Task<IActionResult> ProductProduct(CreateProductDto createProductDto)
+        public async Task<IActionResult> CreateProduct(CreateProductDto createProductDto)
         {
-            await _ProductService.CreateProductAsync(createProductDto);
+            await _productService.CreateProductAsync(createProductDto);
             return Ok("Product added successfully");
         }
 
         [HttpDelete]
         public async Task<IActionResult> DeleteCategory(string id)
         {
-            await _ProductService.DeleteProductAsync(id);
+            await _productService.DeleteProductAsync(id);
             return Ok("Product deleted successfully");
         }
         [HttpPut]
 
         public async Task<IActionResult> UpdateProduct(UpdateProductDto updateProductDto)
         {
-            await _ProductService.UpdateProductAsync(updateProductDto);
+            await _productService.UpdateProductAsync(updateProductDto);
             return Ok("Product updated successfully");
         }
     }
