@@ -20,16 +20,26 @@ namespace MultiShop.Discount.Services
             parameters.Add("@rate", createCouponDto.Rate);
             parameters.Add("@isActive", createCouponDto.IsActive);
             parameters.Add("@validDate", createCouponDto.ValidDate);
-            using(var connection = _context.CreateConnection())
+            using (var connection = _context.CreateConnection())
             {
                 await connection.ExecuteAsync(query, parameters);
             }
-
         }
 
         public Task DeleteCouponAsync(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<List<ResultCouponDto>> GetAllCouponAsync()
+        {
+            string query = "Select * From Coupons";
+            using (var connection = _context.CreateConnection())
+            {
+                var values = await connection.QueryAsync<ResultCouponDto>(query);
+                return values.ToList();
+
+            }
         }
 
         public Task<GetByIdCouponDto> GetByIdCouponAsync(int id)
